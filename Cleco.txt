@@ -1,0 +1,218 @@
+Cleco - CLadística ECOlógica
+============================
+
+SQL
+---
+
+create table taxon (
+	id serial primary key,
+	anc int references taxon,
+	name text,
+	nreg text,
+	nest text,
+	eco text,
+	geo text,
+	doubt smallint default 0,
+	extinct smallint default 0,
+	namept text,
+	nameen text,
+	namezh text,
+	ref text
+);
+
+
+Geografia
+---------
+
+Sigla	Local	Região
+A	Australiana
+a	Austrália	S
+aa	AntÁrtica
+ai	AntIlhas	M
+al	ALgéria/ArgéLia	F
+am	AMazônia	M
+an	ANdes	M
+ar	ARgentina	M
+b	Borneo	S
+ba	BAhamas	M
+bo	BOtswana	F
+br	BRasil	M
+c	Central
+cal	CALifórnia	M
+ca	CAnadá	M
+cau	CÁUcaso	S
+cb	CariBe	M
+ch	CHina	S
+cl	ChiLe	M
+co	COlômbia	M
+cr	Costa Rica	M
+E	Europa
+É	Etiópica
+e	lEste
+eq	EQuador	M
+F	áFrica
+Fh	chifre da áfrica (aFrican Horn)	F
+fj	FiJi	S
+Fnn	áFrica Norte do saara	F
+fs	áFrica do Sul	F
+Fss	áFrica Sub-Saariana	F
+f	Frio
+fl	FLórida	M
+G	Global/cosmopolita
+g	Galápagos	M
+gu	GUatemala	M
+H	Holártico
+h	Hawaii	M
+Hn	Hemisfério Norte
+Hs	Hemisfério Sul
+I	Indonésia	S
+i	Índia	S
+is	Ilhas Salomão	S
+j	Java	S
+jp	JaPão	S
+k	sri lanKa	S
+kn	coréia/Korea do Norte	S
+ks	coréia/Korea do Sul	S
+M	aMéricas
+m	Madagascar	F
+ma	ilhas MAurício	F
+me	MEditerrâneo	F
+mel	MELanésia	S
+mic	MICronésia	S
+ml	MaLásia	S
+mn	MaNchúria	S
+mp	península malaia (Malay Peninsula)	S
+my	MYanmar	S
+N	Neotropical
+n	norte
+nc	Nova Caledônia	S
+ng	Nova Guiné	S
+nz	Nova Zelândia	S
+O	Oriental
+oa	Oceano Atlântico
+oc	OCeania	S
+oi	Oceano Índico
+oip	Oceano Indo-Pacífico
+om	Oriente Médio	S
+op	Oceano Pacífico
+P	Paleártica
+pa	PAnamá	M
+pe	Peru	M
+ph	filipinas (PHilippines)	S
+pk	paquistão (PaKistan)	S
+png	Papua Nova Guiné	S
+pr	PaRaguai	M
+Q	eQuatorial
+q	Quente
+R	neáRtica
+r.A	Amazonas	M
+r.C	Congo	F
+r.G	Ganges	S
+r.H	He/Amarelo/黄河/河	S
+r.I	Indus	S
+r.L	La plata	M
+r.M	Mississipi/Missouri	M
+r.N	Nilo	F
+r.O	Orinoco	M
+r.ob	Ob/Irtysh	S
+r.P	Paraná	M
+r.V	Volga	S
+r.Y	Yangtze/长江/江	S
+r.yi	Yenisei/Angara/Selenga	S
+S	áSia
+s	Sul
+sa	SAmoa	S
+sT	Sub-Tropical
+su	SUmatra	S
+T	Tropical
+t	Temperado
+ta	TAsmânia	S
+tl	TaiLândia	S
+to	TOnga	S
+tr	TRinidad	M
+u	tUndra (taiga?)
+us	eua (United States)	M
+v	Venezuela	M
+vi	VIetnã	S
+VM	Velho Mundo
+w	oeste (West)
+x	méXico	M
+y	seYchelles	F
+
+
+Algoritmo
+---------
+
+addNode(todos) {
+	calcula filhos e descendentes
+	medeNo(cada) // só pra w,h
+}
+calcTree() {
+	medeNo(0)
+	tree[0].l,r,t,b
+	angFilhos(0->recursivo-todos) {
+		angFilhos...
+	}
+	unfold(0);
+}
+drawTree() {
+	calcTree()
+	drawNode(cada) {
+		medeNo(cada)
+		text(cada)
+	}
+	tree[cada].l,r,t,b
+}
+
+
+Gramática ecológica
+-------------------
+
+. A maioria dos caracteres age geralmente de forma isolada, como 漠 árido/deserto, 木 arborícola, 夜 noturno, 杂 onívoro, 卵 ovíparo, 交 colonial, 羽 asa/alado...
+	. ainda assim podem ser modificados por um complemento, como 半漠 semi-árido
+. Alguns caracteres podem pedir um complemento, como 象 mimético (mimetiza quem?), 西 ninho (em árvores, no chão, grande, pequeno?)
+	. se esse caractere estiver sozinho, ainda pode haver sentido (usa mimetismo como forma de defesa, embora a espécie/grupo modelo não tenha sido identificado; a espécie constrói ninhos, embora não tenhamos detalhes sobre o mesmo) -- NÃO É MELHOR TORNAR O COMPLEMENTO OBRIGATÓRIO?
+	. o complemento pode ser outro táxon [Aniliidae 象(Elapidae)] ou outro caracter [西木 ninho arbóreo, 西土 ninho terrestre]
+. Alguns caracteres exigem um complemento, como 子 juvenil, 成 adulto, 久 idade máxima, 上 superior, 前 anteior, 半 semi-, 小 pequeno...
+	. o complemento pode ser outro caractere [Cicadidae 子挖 (ninfa escavadora)] , mais de um caractere [成无吃 adultos não se alimentam] ou outro tipo de informação [久60y (60 anos) ou 久3m (3 meses); 社1, 社2 ou 社3 (níveis de socialidade)]
+	. o complemento pode vir antes ou depois do caracter principal: 小目, 目小, 半漠, [Theropoda 前支小 (membros anteriores reduzidos)]...
+. Alguns caracteres podem exigir um complemento, ou ser complemento de outros, como 吃 [Vermilingua 吃(Formicidae|Isoptera)] ou [Ephemeroptera 成无吃]
+. Alguns caracteres são compostos e exigem um complemento ao mesmo tempo, como [/Clelia 捕专(Serpentes) predador ofiófago, ou especialista em cobras]
+
+. Dados numéricos (peso e tamanho) devem ser separados dos hanzi por espaço
+. Números não devem ter separador de milhar, e usar vírgula como separador decimal
+. sp, g, f, o... não precisam ser seguidos de ponto (em geo sim)
+. Não deve haver espaço dentro dos tokens (peso, tamanho, hanzi)
+. A vírgula deve ser usada no meio do token hanzi para evitar ambiguidades
+
+select t2.name ancestor,t1.name,t1.eco,t1.geo
+from taxon t1
+join taxon t2 on t2.id = t1.anc
+where t1.eco != '' or t1.geo != ''
+order by t1.id
+
+
+
+su - postgres
+pwd
+psql -h localhost -U postgres cleco
+copy (select * from taxon order by id) to '/var/lib/postgresql/taxon1.csv' with (format csv,delimiter '#',quote '%');
+
+drop schema public cascade;
+create schema public;
+create table taxon (
+	id serial primary key,
+	anc int references taxon,
+	name text,
+	nreg text,
+	nest text,
+	eco text,
+	geo text,
+	doubt smallint default 0,
+	extinct smallint default 0,
+	namept text,
+	nameen text,
+	namezh text,
+	ref text
+);
+copy taxon (anc,name,nreg,nest,eco,geo,doubt,extinct,namept,nameen,namezh,ref) from '/home/rodrigo/prog/cleco/taxon1.csv' (format csv, delimiter '#', quote '%');
